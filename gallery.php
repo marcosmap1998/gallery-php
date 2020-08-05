@@ -1,3 +1,7 @@
+<?php
+    $_SESSION['username'] = "Admin";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,24 +44,29 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-4 text-center">
-                <h3>Upload</h3>
-                <form action="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data" class="my-3">
-                    <div class="form-group">
-                        <input type="text" name="filename" placeholder="File name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="filetitle" placeholder="Image title" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="filedesc" placeholder="Image description" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="file" name="file"  class="form-control">
-                    </div>
-                    <button class="btn btn-primary btn-block">Upload</button>
-                </form>
-            </div>
+            <?php 
+                if(isset($_SESSION['username'])){
+                    echo '
+                    <div class="col-md-4 text-center">
+                        <h3>Upload</h3>
+                        <form action="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data" class="my-3">
+                            <div class="form-group">
+                                <input type="text" name="filename" placeholder="File name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="filetitle" placeholder="Image title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="filedesc" placeholder="Image description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="file"  class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" name="submit">Upload</button>
+                        </form>
+                    </div>';
+                }    
+            ?>
         </div>
     </div>
     <footer class="bg-light mt-5">
