@@ -52,7 +52,7 @@
                             $result = mysqli_stmt_get_result($stmt);
                             while($row = mysqli_fetch_assoc($result)){
                                 echo '
-                                <div class="col-sm-6 col-md-3">
+                                <div class="col-sm-6 col-md-6 col-lg-3">
                                     <div class="card mt-4">
                                         <img src="img/gallery/'.$row['imageFullNameGallery'].'" class="card-img-top img-fluid" alt="">
                                         <div class="card-body">
@@ -73,7 +73,7 @@
             <?php 
                 if(isset($_SESSION['username'])){
                     echo '
-                    <div class="col-md-4 text-center mt-5">
+                    <div class="col-md-6 col-lg-4 text-center mt-5">
                         <h3>Upload</h3>
                         <form action="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data" class="my-3">
                             <div class="form-group">
