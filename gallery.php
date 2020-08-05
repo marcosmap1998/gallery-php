@@ -36,10 +36,36 @@
 
     <div class="container">
         <div class="row mt-4">
-            <div class="col-md-8">
+            <div class="col-12">
                 <h2>GALLERY</h2>
-                <div class="gallery-container">
-                    
+                <div class="gallery-container d-flex flex-row flex-wrap">
+                    <?php
+                        include_once 'includes/dbh.inc.php';
+
+                        $sql = "SELECT * FROM gallery ORDER BY orderGallery DESC";
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt, $sql)){
+                            echo 'SQL statement failed';
+                        }
+                        else {
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo '
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card mt-4">
+                                        <img src="img/gallery/'.$row['imageFullNameGallery'].'" class="card-img-top img-fluid" alt="">
+                                        <div class="card-body">
+                                            <h3 class="card-title">'.$row['titleGallery'].'</h3>
+                                            <p class="card-text">'.$row['descGallery'].'</p>
+                                            <a href="#" class="btn btn-primary btn-lg btn-block">Ver imágen</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                ';
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -47,7 +73,7 @@
             <?php 
                 if(isset($_SESSION['username'])){
                     echo '
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center mt-5">
                         <h3>Upload</h3>
                         <form action="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data" class="my-3">
                             <div class="form-group">
